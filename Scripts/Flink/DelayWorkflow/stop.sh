@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
 set -e
 
 CONTAINER_NAME="flink-jobmanager"
@@ -12,6 +13,7 @@ if [ ! "$(docker ps -q -f name=^/${CONTAINER_NAME}$)" ]; then
 fi
 
 echo "Searching for running Flink jobs named '${JOB_NAME}'..."
+# Capture job IDs, removing any empty lines or warnings
 JOB_IDS=$(docker exec ${CONTAINER_NAME} flink list 2>/dev/null | grep "${JOB_NAME}" | grep "RUNNING" | awk -F ' : ' '{print $2}')
 
 if [ -z "${JOB_IDS}" ]; then

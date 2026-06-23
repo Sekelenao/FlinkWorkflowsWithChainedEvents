@@ -1,9 +1,11 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
 set -e
 
+# Determine directories
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_ROOT="$( cd "${SCRIPT_DIR}/../.." && pwd )"
+PROJECT_ROOT="$( cd "${SCRIPT_DIR}/../../.." && pwd )"
 
 CONTAINER_NAME="flink-jobmanager"
 JAR_PATH="${PROJECT_ROOT}/DelayWorkflow/target/DelayWorkflow-1.0.0.jar"
