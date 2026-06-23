@@ -1,10 +1,14 @@
 package io.github.sekelenao.producers.generator;
 
 import io.github.sekelenao.producers.util.Randoms;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 
 public final class InstantGenerator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InstantGenerator.class);
 
     private final long regularDelay;
 
@@ -21,6 +25,10 @@ public final class InstantGenerator {
         this.regularDelay = regularDelay;
         this.probabilityToHugeDelay = probabilityToHugeDelay;
         this.hugeDelay = hugeDelay;
+        LOGGER.info(
+            "Configured InstantGenerator with regular delay of {}ms and {}% chance to be delayed for {}ms",
+            regularDelay, probabilityToHugeDelay, hugeDelay
+        );
     }
 
     public Instant generate(){
