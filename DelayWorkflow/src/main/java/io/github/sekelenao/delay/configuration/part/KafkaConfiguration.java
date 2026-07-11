@@ -5,9 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class KafkaConfiguration {
+public class KafkaConfiguration implements Serializable {
 
     @NotEmpty
     private final List<String> bootstrapServers;

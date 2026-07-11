@@ -2,6 +2,7 @@ package io.github.sekelenao.delay;
 
 import io.github.sekelenao.delay.configuration.JobConfiguration;
 import io.github.sekelenao.delay.kafka.KafkaSourceFactory;
+import io.github.sekelenao.delay.operator.DumbMapFunction;
 import io.github.sekelenao.flinkboot.core.api.Flinkboot;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -20,7 +21,7 @@ public final class Main {
             "Kafka Train Events Source"
         );
 
-        stream.print();
+        stream.map(new DumbMapFunction(configuration)).print();
 
         executionEnvironment.execute("DelayWorkflow");
     }

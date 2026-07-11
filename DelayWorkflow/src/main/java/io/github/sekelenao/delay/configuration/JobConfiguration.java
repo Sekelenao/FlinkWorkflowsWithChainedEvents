@@ -7,7 +7,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class JobConfiguration {
+import java.io.Serializable;
+
+public class JobConfiguration implements Serializable {
 
     @Valid
     @NotNull

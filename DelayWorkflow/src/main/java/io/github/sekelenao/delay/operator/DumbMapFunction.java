@@ -6,15 +6,15 @@ import org.apache.flink.api.common.functions.MapFunction;
 
 public class DumbMapFunction implements MapFunction<TrainEvent, TrainEvent> {
 
-    private final String jobName;
+    private final JobConfiguration jobConfiguration;
 
     public DumbMapFunction(JobConfiguration jobConfiguration){
-        this.jobName = jobConfiguration.jobName();
+        this.jobConfiguration = jobConfiguration;
     }
 
     @Override
     public TrainEvent map(TrainEvent value) {
-        return new TrainEvent(value.id(), jobName, value.timestamp());
+        return new TrainEvent(value.id(), jobConfiguration.jobName(), value.timestamp());
     }
 
 }
