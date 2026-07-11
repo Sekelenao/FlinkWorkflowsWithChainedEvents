@@ -1,3 +1,4 @@
+job-name: "train-event-consumer"
 kafka:
   bootstrap-servers:
     - kafka:29092
