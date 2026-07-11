@@ -1,6 +1,6 @@
 package io.github.sekelenao.producers;
 
-import io.github.sekelenao.producers.configuration.TrainConfigurations;
+import io.github.sekelenao.producers.configuration.TrainProperties;
 import io.github.sekelenao.producers.generator.TrainEventTimelineGenerator;
 import io.github.sekelenao.producers.kafka.KafkaUtilities;
 import io.github.sekelenao.smallyaml.api.document.BoundedDocument;
@@ -23,7 +23,7 @@ public class TrainEventsProducer {
         try(var inputStream = TrainEventsProducer.class.getResourceAsStream(CONFIGURATION_RESOURCE_LOCATION)){
             Objects.requireNonNull(inputStream, "Configuration file not found");
             return BoundedDocument.factoryBuilder()
-                .scan(TrainConfigurations.class)
+                .scan(TrainProperties.class)
                 .buildFactory()
                 .createDocument(inputStream);
         }
@@ -32,7 +32,7 @@ public class TrainEventsProducer {
     public static void main(String[] args) throws IOException {
         var kafkaUtilities = KafkaUtilities.initialize();
         var configuration = loadConfigurationFromResources();
-        var producerDuration = configuration.get(TrainConfigurations.PRODUCER_DURATION, Duration::parse);
+        var producerDuration = configuration.get(TrainProperties.PRODUCER_DURATION, Duration::parse);
         var timeToStop = Instant.now().plus(producerDuration);
         LOGGER.info("Producer will run for {} and stop at {}", producerDuration, timeToStop);
         try (var producer = kafkaUtilities.createProducer()) {

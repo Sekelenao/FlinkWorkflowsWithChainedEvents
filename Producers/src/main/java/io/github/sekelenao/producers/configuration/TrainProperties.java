@@ -3,7 +3,7 @@ package io.github.sekelenao.producers.configuration;
 import io.github.sekelenao.smallyaml.api.document.property.MultipleMandatoryIdentifier;
 import io.github.sekelenao.smallyaml.api.document.property.SingleMandatoryIdentifier;
 
-public final class TrainConfigurations {
+public final class TrainProperties {
 
     public static final SingleMandatoryIdentifier PRODUCER_DURATION = SingleMandatoryIdentifier.define("train.producer.duration");
 
@@ -15,7 +15,7 @@ public final class TrainConfigurations {
 
     public static final SingleMandatoryIdentifier HUGE_DELAY_MS = SingleMandatoryIdentifier.define("train.huge-delay-in-ms");
 
-    private TrainConfigurations(){
+    private TrainProperties(){
         throw new AssertionError("You cannot instantiate this class");
     }
 

@@ -1,6 +1,6 @@
 package io.github.sekelenao.producers.generator;
 
-import io.github.sekelenao.producers.configuration.TrainConfigurations;
+import io.github.sekelenao.producers.configuration.TrainProperties;
 import io.github.sekelenao.producers.event.TrainEvent;
 import io.github.sekelenao.producers.util.Randoms;
 import io.github.sekelenao.smallyaml.api.document.BoundedDocument;
@@ -17,10 +17,10 @@ public class TrainEventTimelineGenerator {
 
     public TrainEventTimelineGenerator(BoundedDocument configuration) {
         Objects.requireNonNull(configuration);
-        this.stations = configuration.get(TrainConfigurations.STATIONS);
-        var regularDelay = configuration.getLong(TrainConfigurations.REGULAR_DELAY_MS);
-        var probabilityToHugeDelay = configuration.getInt(TrainConfigurations.CHANCE_OF_HUGE_DELAY);
-        var hugeDelay = configuration.getLong(TrainConfigurations.HUGE_DELAY_MS);
+        this.stations = configuration.get(TrainProperties.STATIONS);
+        var regularDelay = configuration.getLong(TrainProperties.REGULAR_DELAY_MS);
+        var probabilityToHugeDelay = configuration.getInt(TrainProperties.CHANCE_OF_HUGE_DELAY);
+        var hugeDelay = configuration.getLong(TrainProperties.HUGE_DELAY_MS);
         this.instantGenerator = new InstantGenerator(regularDelay, probabilityToHugeDelay, hugeDelay);
     }
 

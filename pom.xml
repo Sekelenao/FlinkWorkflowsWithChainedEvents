@@ -16,12 +16,16 @@
 
     <properties>
 
+        <dependency.flinkboot.version>0.0.1</dependency.flinkboot.version>
+
         <dependency.kafka-clients.version>4.3.0</dependency.kafka-clients.version>
-        <dependency.jackson.version>3.2.0</dependency.jackson.version>
+        <dependency.jackson2.version>2.22.0</dependency.jackson2.version>
+        <dependency.jackson3.version>3.2.0</dependency.jackson3.version>
         <dependency.small-yaml.version>0.2.0</dependency.small-yaml.version>
         <dependency.slf4j.version>2.0.13</dependency.slf4j.version>
         <dependency.logback.version>1.5.34</dependency.logback.version>
         <dependency.flink.version>2.2.1</dependency.flink.version>
+        <dependency.flink-connector-kafka.version>5.0.0-2.2</dependency.flink-connector-kafka.version>
 
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -32,6 +36,13 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>io.github.sekelenao</groupId>
+                <artifactId>flinkboot-core</artifactId>
+                <version>${dependency.flinkboot.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>io.github.sekelenao</groupId>
                 <artifactId>small-yaml</artifactId>
@@ -57,15 +68,33 @@
             </dependency>
 
             <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${dependency.jackson2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${dependency.jackson2.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>${dependency.jackson.version}</version>
+                <version>${dependency.jackson3.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>tools.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${dependency.jackson.version}</version>
+                <version>${dependency.jackson3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tools.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${dependency.jackson3.version}</version>
             </dependency>
 
             <dependency>
@@ -78,6 +107,19 @@
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-clients</artifactId>
                 <version>${dependency.flink.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-kafka</artifactId>
+                <version>${dependency.flink-connector-kafka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.sekelenao</groupId>
+                <artifactId>flinkboot-test</artifactId>
+                <version>${dependency.flinkboot.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
