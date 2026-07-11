@@ -1,0 +1,5 @@
+kafka:
+  bootstrap-servers:
+    - kafka:29092
+  topic: "chained-events"
+  group-id: "events-consumer-v1"

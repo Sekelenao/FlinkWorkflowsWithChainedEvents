@@ -1,37 +1,29 @@
 package io.github.sekelenao.delay;
 
+import io.github.sekelenao.delay.configuration.JobConfiguration;
+import io.github.sekelenao.delay.kafka.KafkaSourceFactory;
+import io.github.sekelenao.flinkboot.core.api.Flinkboot;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.source.legacy.SourceFunction;
 
 public final class Main {
 
     public static void main(String[] args) throws Exception {
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        var flinkboot = Flinkboot.initialize(args);
+        var configuration = flinkboot.configuration(JobConfiguration.class);
+        var executionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment();
+        var source = new KafkaSourceFactory(configuration).supply();
 
-        env.addSource(new DummySource())
-           .name("dummy-source")
-           .print()
-           .name("dummy-print");
+        var stream = executionEnvironment.fromSource(
+            source,
+            WatermarkStrategy.noWatermarks(),
+            "Kafka Train Events Source"
+        );
 
-        env.execute("DelayWorkflow");
+        stream.print();
+
+        executionEnvironment.execute("DelayWorkflow");
     }
 
-    private static class DummySource implements SourceFunction<String> {
-        private volatile boolean isRunning = true;
-
-        @Override
-        public void run(SourceContext<String> ctx) throws Exception {
-            long count = 0;
-            while (isRunning) {
-                ctx.collect("Dummy event " + count++);
-                Thread.sleep(1000);
-            }
-        }
-
-        @Override
-        public void cancel() {
-            isRunning = false;
-        }
-    }
 }
 
