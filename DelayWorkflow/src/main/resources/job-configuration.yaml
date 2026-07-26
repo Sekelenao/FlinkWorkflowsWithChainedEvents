@@ -3,7 +3,7 @@ job:
 
 kafka:
   bootstrap-servers:
-    - "localhost:9092"
+    - "kafka:29092"
   group-id: "events-consumer-v1"
   topics:
     - "chained-events"
