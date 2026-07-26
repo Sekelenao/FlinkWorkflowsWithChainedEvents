@@ -8,6 +8,7 @@ import io.github.sekelenao.smallyaml.api.document.BoundedDocument;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class TrainEventTimelineGenerator {
 
@@ -29,7 +30,7 @@ public class TrainEventTimelineGenerator {
         return stations.stream()
             .filter(station -> Randoms.percentage(50))
             .map(station -> new TrainEvent(trainId, station, instantGenerator.generate()))
-            .toList();
+            .collect(Collectors.toList());
     }
 
 }
