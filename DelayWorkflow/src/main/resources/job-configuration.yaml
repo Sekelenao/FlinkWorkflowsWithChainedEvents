@@ -1,5 +1,8 @@
 job:
   name: "train-event-consumer"
+  environment:
+    properties:
+      pipeline.operator-chaining.enabled: "false"
 
 kafka:
   bootstrap-servers:
