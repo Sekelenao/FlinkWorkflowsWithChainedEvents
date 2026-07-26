@@ -16,18 +16,11 @@
 
     <properties>
 
-        <dependency.flinkboot.version>0.0.1</dependency.flinkboot.version>
-
-        <dependency.kafka-clients.version>4.3.0</dependency.kafka-clients.version>
-        <dependency.jackson2.version>2.22.0</dependency.jackson2.version>
-        <dependency.jackson3.version>3.2.0</dependency.jackson3.version>
+        <dependency.flinkboot.version>0.1.0-1.20</dependency.flinkboot.version>
         <dependency.small-yaml.version>0.2.0</dependency.small-yaml.version>
-        <dependency.slf4j.version>2.0.13</dependency.slf4j.version>
         <dependency.logback.version>1.5.34</dependency.logback.version>
-        <dependency.flink.version>2.2.1</dependency.flink.version>
-        <dependency.flink-connector-kafka.version>5.0.0-2.2</dependency.flink-connector-kafka.version>
 
-        <java.version>21</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,8 +32,10 @@
 
             <dependency>
                 <groupId>io.github.sekelenao</groupId>
-                <artifactId>flinkboot-core</artifactId>
+                <artifactId>flinkboot</artifactId>
                 <version>${dependency.flinkboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -49,78 +44,6 @@
                 <version>${dependency.small-yaml.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${dependency.slf4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${dependency.logback.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka-clients</artifactId>
-                <version>${dependency.kafka-clients.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${dependency.jackson2.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${dependency.jackson2.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tools.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${dependency.jackson3.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tools.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${dependency.jackson3.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tools.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
-                <version>${dependency.jackson3.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-streaming-java</artifactId>
-                <version>${dependency.flink.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-clients</artifactId>
-                <version>${dependency.flink.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-connector-kafka</artifactId>
-                <version>${dependency.flink-connector-kafka.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.sekelenao</groupId>
-                <artifactId>flinkboot-test</artifactId>
-                <version>${dependency.flinkboot.version}</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

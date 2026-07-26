@@ -21,41 +21,30 @@
 
         <dependency>
             <groupId>io.github.sekelenao</groupId>
-            <artifactId>small-yaml</artifactId>
+            <artifactId>flinkboot-kafka</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-java</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka</artifactId>
+            <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>tools.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>tools.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>io.github.sekelenao</groupId>
             <artifactId>flinkboot-test</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -77,13 +66,18 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>org.slf4j:*</exclude>
-                                    <exclude>ch.qos.logback:*</exclude>
-                                    <exclude>log4j:*</exclude>
-                                </excludes>
-                            </artifactSet>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+
+                            <!-- Relocate Jackson to prevent version clashes with Flink runtime -->
+                            <!-- You can customize the shadedPattern namespace to match your project's packaging if preferred -->
+                            <relocations>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson</pattern>
+                                    <shadedPattern>io.github.sekelenao.flinkboot.shaded.jackson</shadedPattern>
+                                </relocation>
+                            </relocations>
+
+                            <!-- Exclude signatures to prevent SecurityException -->
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
@@ -94,12 +88,6 @@
                                     </excludes>
                                 </filter>
                             </filters>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>io.github.sekelenao.delay.Main</mainClass>
-                                </transformer>
-                            </transformers>
                         </configuration>
                     </execution>
                 </executions>

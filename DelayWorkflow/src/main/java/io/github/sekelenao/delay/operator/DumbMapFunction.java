@@ -1,20 +1,21 @@
 package io.github.sekelenao.delay.operator;
 
-import io.github.sekelenao.delay.configuration.JobConfiguration;
 import io.github.sekelenao.delay.event.TrainEvent;
 import org.apache.flink.api.common.functions.MapFunction;
 
+import java.util.Objects;
+
 public class DumbMapFunction implements MapFunction<TrainEvent, TrainEvent> {
 
-    private final JobConfiguration jobConfiguration;
+    private final String jobName;
 
-    public DumbMapFunction(JobConfiguration jobConfiguration){
-        this.jobConfiguration = jobConfiguration;
+    public DumbMapFunction(String jobName) {
+        this.jobName = Objects.requireNonNull(jobName, "jobName must not be null");
     }
 
     @Override
     public TrainEvent map(TrainEvent value) {
-        return new TrainEvent(value.id(), jobConfiguration.jobName(), value.timestamp());
+        return new TrainEvent(value.id(), jobName, value.timestamp());
     }
 
 }

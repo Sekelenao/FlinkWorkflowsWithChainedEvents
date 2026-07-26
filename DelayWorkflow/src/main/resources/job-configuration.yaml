@@ -1,6 +1,10 @@
-job-name: "train-event-consumer"
+job:
+  name: "train-event-consumer"
+
 kafka:
   bootstrap-servers:
-    - kafka:29092
-  topic: "chained-events"
+    - "localhost:9092"
   group-id: "events-consumer-v1"
+  topics:
+    - "chained-events"
+  starting-offsets: "EARLIEST"

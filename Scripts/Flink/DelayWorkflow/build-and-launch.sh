@@ -29,6 +29,6 @@ echo "Copying configuration to Flink JobManager container..."
 docker cp "${PROJECT_ROOT}/DelayWorkflow/src/main/resources/job-configuration.yaml" "${CONTAINER_NAME}:/tmp/job-configuration.yaml"
 
 echo "Launching Flink stream job..."
-docker exec -w /tmp ${CONTAINER_NAME} flink run -d -c ${MAIN_CLASS} ${CONTAINER_JAR_PATH}
+docker exec -w /tmp ${CONTAINER_NAME} flink run -d -c ${MAIN_CLASS} ${CONTAINER_JAR_PATH} -flinkboot-configurations file:/tmp/job-configuration.yaml
 
 echo "Success: Flink job submitted successfully!"
